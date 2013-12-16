@@ -60,7 +60,7 @@ junitparams fournit la possibilité de charger les paramètres d'une méthode de
 
 	@Parameters(source = MyProvider.class)
 
-Pour illustrer cela, nous allons a présent considérer la méthode +internationalize(String localPhoneNumber)+ fournie dans les sources. Cette méthode doit ajouter un préfixe international (++33+) à des numéros locaux français (par exemple +0120304050+).
+Pour illustrer cela, nous allons a présent considérer la méthode +internationalize(String localPhoneNumber)+ fournie dans les sources. Cette méthode doit ajouter un préfixe international (`+33`) à des numéros locaux français (par exemple +0120304050+).
 
 Vous devez :
 
@@ -73,7 +73,7 @@ _TODO 4.x_
 
 Il est également possible de charger les paramètres depuis un fichier externe (CSV), en remplaçant l'annotation +@Parameters+ par +@FileParameters("src/test/resources/data.csv")+. Le cas d'utilisation type est lorsque l'on dispose d'un très grand nombre de jeux de données à tester, ou bien lorsque les données de tests sont générées par un programme externe.
 
-Il s'agit maintenant de développer et tester la méthode +getLocalZoneIndicator(String phoneNumber)+, qui extrait l'indicateur de zone d'un numéro de téléphone français (ex.: "05" pour 0520304050, "01" pour \+33120304050). Un fichier CSV contenant des données de test vous est fourni (+local_zone_indicators.csv+).
+Il s'agit maintenant de développer et tester la méthode +getLocalZoneIndicator(String phoneNumber)+, qui extrait l'indicateur de zone d'un numéro de téléphone français (ex.: "05" pour `0520304050`, "01" pour `+33120304050`). Un fichier CSV contenant des données de test vous est fourni (+local_zone_indicators.csv+).
 
 Vous devez :
 
