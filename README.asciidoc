@@ -50,16 +50,17 @@ footnote:[Une bière sera offerte au premier participant qui gère tous les cas 
 == Un autre test paramétrique, tout seul cette fois
 _TODO 2.x_
 
-Sur le modèle de l'exercice précédent, il vous faut à présent écrire un nouveau test unitaire paramétrique pour la méthode +isMobilePhoneNumber(String phoneNumber)+ qui vérifier si un numéro de téléphones est un numéro de mobile. Les numéros considérés comme valides sont les numéros français nationaux de mobile (ex: 0620304050), et les numéros de mobile français avec suffixe international (ex: +33620304050, 0033620304050).
+Sur le modèle de l'exercice précédent, il vous faut à présent écrire un nouveau test unitaire paramétrique pour la méthode +isMobilePhoneNumber(String phoneNumber)+ qui vérifie si un numéro de téléphone est un numéro de mobile. Les numéros considérés comme valides sont les numéros français nationaux de mobile (ex: 0620304050), et les numéros de mobile français avec suffixe international (ex: +33620304050, 0033620304050).
 
 
 == Charger les paramètres depuis une classe externe
 _TODO 3.x_
+
 junitparams fournit la possibilité de charger les paramètres d'une méthode de test depuis une classe externe. C'est très pratique lorsque l'on souhaite externaliser la logique de génération des paramètres (par exemple pour la réutiliser ailleurs, ou parce qu'elle est complexe). Pour ce faire, il faut ajouter un paramètre à l'annotation +@Parameters+ de junitparams :
 
 	@Parameters(source = MyProvider.class)
 
-Pour illustrer cela, nous allons a présent considérer la méthode +internationalize(String localPhoneNumber)+ fournie dans les sources. Cette méthode doit ajouter un préfixe international (+\+33+) à des numéros locaux français (par exemple +0120304050+).
+Pour illustrer cela, nous allons a présent considérer la méthode +internationalize(String localPhoneNumber)+ fournie dans les sources. Cette méthode doit ajouter un préfixe international (++33+) à des numéros locaux français (par exemple +0120304050+).
 
 Vous devez :
 
@@ -72,7 +73,7 @@ _TODO 4.x_
 
 Il est également possible de charger les paramètres depuis un fichier externe (CSV), en remplaçant l'annotation +@Parameters+ par +@FileParameters("src/test/resources/data.csv")+. Le cas d'utilisation type est lorsque l'on dispose d'un très grand nombre de jeux de données à tester, ou bien lorsque les données de tests sont générées par un programme externe.
 
-Il s'agit maintenant de développer et tester la méthode +getLocalZoneIndicator(String phoneNumber)+, qui extrait l'indicateur de zone d'un numéro de téléphone français (ex.: "05" pour "0520304050", "01" pour "+33120304050"). Un fichier CSV contenant des données de test vous est fourni (+local_zone_indicators.csv+).
+Il s'agit maintenant de développer et tester la méthode +getLocalZoneIndicator(String phoneNumber)+, qui extrait l'indicateur de zone d'un numéro de téléphone français (ex.: "05" pour 0520304050, "01" pour \+33120304050). Un fichier CSV contenant des données de test vous est fourni (+local_zone_indicators.csv+).
 
 Vous devez :
 
