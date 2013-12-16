@@ -21,7 +21,7 @@ La méthode fournissant les paramètres est ici +parametersForIsValidPhoneNumber
 Il vous faut donc :
 
 - implémenter la méthode de test +isValidPhoneNumberTest+
-- lancer la classe de test et vérifier que les tests sont au rouge (TDD). En profiter pour observer l'affichage des résultats de tests dans l'EDI (Eclipse, très similaire sur IntelliJ) :
+- lancer la classe de test et vérifier que le test est au rouge (TDD). En profiter pour observer l'affichage des résultats de tests dans l'EDI (Eclipse, très similaire sur IntelliJ) :
 +
 image::images/test-result-1.png[]
 +
@@ -45,7 +45,7 @@ et les cas suivants ne doivent *pas* passer :
 	0020304050
 
 C'est l'occasion de réviser vos expressions rationnelles :)
-Une bière sera offerte au premier participant qui gère tous les cas en une seule expression rationnelle (et qui a lu l'énoncé :P).
+footnote:[Une bière sera offerte au premier participant qui gère tous les cas en une seule expression rationnelle (et qui a lu l'énoncé :P)].
 
 == Un autre test paramétrique, tout seul cette fois
 _TODO 2.x_
