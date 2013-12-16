@@ -6,7 +6,7 @@ L'objectif de cet atelier pratique est de découvrir junitparams. Junitparams fo
 * lisibles : chaque méthode de test dispose de ses propres paramètres, donc ceux-ci restent très lisibles. De plus, le fait que les paramètres apparaissent dans la signature de la méthode de test facilite encore plus la compréhension du fonctionnement du test,
 * indépendants : les tests paramétriques ont chacun leur propre source de paramètres, ce qui permet également de mélanger tests paramétriques et non paramétriques dans la même classe.
 
-Chaque section de cet atelier est associée à un morceau de code à compléter ou écrire dans le code. Utiliser la vue tâches (java tasks) de l'IDE pour visualiser les _TODO_, qui sont numérotés et précisé au début de chaque section.
+Chaque section de cet atelier est associée à un morceau de code à compléter ou à écrire. Utiliser la vue tâches (java tasks) de l'IDE pour visualiser les _TODO_, qui sont numérotés et précisés au début de chaque section.
 
 
 == Mon premier test paramétrique
@@ -14,19 +14,18 @@ _TODO 1.x_
 
 Nous désirons développer la méthode utilitaire +isValidPhoneNumber(String phoneNumber)+ de la classe +PhoneUtils+ qui vérifie si un numéro de téléphone donné est valide. Pour ce faire, nous allons tout d'abord écrire un test unitaire paramétrique, +isValidPhoneNumberTest+, dont le squelette est déjà présent dans la classe +PhoneUtilsTest+. Les numéros considérés comme valides sont les numéros français nationaux (ex: 0120304050), et les numéros internationaux (ex: +33120304050, 0033120304050).
 
-On remarque que contrairement aux tests unitaires Junit habituels, cette méthode dispose de paramètres : il s'agit d'un test paramétrique. Vous l'aurez deviné, le premier paramètre est le numéro à tester, et le second le résultat attendu pour ce numéro. L'ensemble de ces deux paramètres forme un jeu de test. Le runner de junitparams, +JUnitParamsRunner+ (visible dans l'annotation +@RunWith(JUnitParamsRunner.class)+ de la classe de test) injectera les paramètres qu'il trouvera fournit par la méthode respectant la convention +parametersFor+ + +nomDeLaMéthodeDeTest+.
+On remarque que contrairement aux tests unitaires Junit habituels, cette méthode dispose de paramètres : il s'agit d'un test paramétrique. Vous l'aurez deviné, le premier paramètre est le numéro à tester, et le second le résultat attendu pour ce numéro. L'ensemble de ces deux paramètres forme un jeu de test. Le runner de junitparams, +JUnitParamsRunner+ (visible dans l'annotation +@RunWith(JUnitParamsRunner.class)+ de la classe de test) injectera les paramètres qu'il trouvera fournis par la méthode respectant la convention de nommage +parametersFor+ + +nomDeLaMéthodeDeTest+.
 
-La méthode fournissant les paramètres est donc ici +parametersForIsValidPhoneNumberTest()+. Les deux premiers jeux de tests sont déjà fournis pour faciliter le démarrage.
+La méthode fournissant les paramètres est ici +parametersForIsValidPhoneNumberTest()+. Les deux premiers jeux de tests sont déjà fournis pour faciliter le démarrage.
 
 Il vous faut donc :
 
 - implémenter la méthode de test +isValidPhoneNumberTest+
-- lancer la classe de test et vérifier que le est au rouge (TDD). En profiter pour observer l'affichage des résultats de tests dans l'EDI (Eclipse, très similaire sur IntelliJ) :
-
+- lancer la classe de test et vérifier que les tests sont au rouge (TDD). En profiter pour observer l'affichage des résultats de tests dans l'EDI (Eclipse, très similaire sur IntelliJ) :
++
 image::images/test-result-1.png[]
-
-On observe que la présentation des résultats dans l'EDI par méthode de test, puis par jeu de test. Cela permet d'identifier très rapidement le jeu de test qui pose problème quand un test échoue. Ici nous utilisons uniquement des types primitifs pour les paramètres, mais lorsque des types complexes (objets) sont utilisés, junitparams appelle automatiquement la méthode +toString()+ de ces objets pour la présentation des résultats de l'exécution des tests, ce qui donne une bonne lisibilité.
-
++
+On observe que la présentation des résultats dans l'EDI se fait par méthode de test, puis par jeu de test. Cela permet d'identifier très rapidement le jeu de test qui pose problème quand un test échoue. Ici nous utilisons uniquement des types primitifs pour les paramètres, mais lorsque des types complexes (objets) sont utilisés, junitparams appelle automatiquement la méthode +toString()+ de ces objets pour la présentation des résultats de l'exécution des tests, ce qui donne une bonne lisibilité.
 - implémenter juste ce qu'il faut dans la méthode pour que le test passent
 - ajouter un jeu de test dans +parametersForIsValidPhoneNumberTest+ et recommencer à partir du deuxième point jusqu'à ce que tous les cas de tests passent.
 
