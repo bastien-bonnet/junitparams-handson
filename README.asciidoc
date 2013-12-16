@@ -8,6 +8,8 @@ L'objectif de cet atelier pratique est de découvrir junitparams. Junitparams fo
 
 Chaque section de cet atelier est associée à un morceau de code à compléter ou à écrire. Utiliser la vue tâches (java tasks) de l'IDE pour visualiser les _TODO_, qui sont numérotés et précisés au début de chaque section.
 
+La classe sur laquelle nous allons travailler, +PhoneUtils+, contient des méthodes utilitaires en rapport avec des numéros de téléphone. Les tests unitaires de cette classe seront écrits dans la classe +PhoneUtilsTest+.
+
 
 == Mon premier test paramétrique
 _TODO 1.x_
@@ -73,7 +75,7 @@ _TODO 4.x_
 
 Il est également possible de charger les paramètres depuis un fichier externe (CSV), en remplaçant l'annotation +@Parameters+ par +@FileParameters("src/test/resources/data.csv")+. Le cas d'utilisation type est lorsque l'on dispose d'un très grand nombre de jeux de données à tester, ou bien lorsque les données de tests sont générées par un programme externe.
 
-Il s'agit maintenant de développer et tester la méthode +getLocalZoneIndicator(String phoneNumber)+, qui extrait l'indicateur de zone d'un numéro de téléphone français (ex.: "05" pour `0520304050`, "01" pour `+33120304050`). Un fichier CSV contenant des données de test vous est fourni (+local_zone_indicators.csv+).
+Il s'agit maintenant de développer et tester la méthode +getLocalZoneIndicator(String phoneNumber)+, qui extrait l'indicateur de zone d'un numéro de téléphone français (ex.: "05" pour `0520304050`, "01" pour `+33120304050`). Un fichier CSV contenant des données de test vous est fourni +local_zone_indicators.csv+.
 
 Vous devez :
 
@@ -91,11 +93,11 @@ Pour les cas simples, c'est-à-dire avec peu de paramètres, junitparams offre l
 
 Cette fonctionnalité est à utiliser avec parcimonie car vous perdez les bénéfices de la compilation.
 
-Vous allez devoir implémenter la méthode +areSameNumber(String number1, String number2)+, qui vérifie si deux numéros correspondent. Par exemple, +0120304050+ et +33120304050+ correspondent, la méthode doit donc retourner +true+.
+Vous allez devoir implémenter la méthode +areSameNumber(String number1, String number2)+, qui vérifie si deux numéros correspondent. Par exemple, +0120304050+ et `+33120304050` correspondent, la méthode doit donc retourner +true+.
 
 Vous devez :
 
-- compléter la méthode de méthode de test unitaire +areSameNumberTest+. Ne pas oublier de spécifier les paramètre de manière littérale directement dans l'annotation.
+- compléter la méthode de méthode de test unitaire +areSameNumberTest+. Ne pas oublier de spécifier les paramètres de manière littérale directement dans l'annotation.
 - implémenter la méthode +areSameNumber+.
 
 
