@@ -34,17 +34,22 @@ On observe que la présentation des résultats dans l'EDI se fait par méthode d
 - ajouter un jeu de test dans +parametersForIsValidPhoneNumberTest+ et recommencer à partir du deuxième point jusqu'à ce que tous les cas de tests passent.
 +
 Aide : les cas suivants doivent passer :
-	0606060606
-	+33606060606
-	0033606060606
 +
+----
+0606060606
++33606060606
+0033606060606
+----
 et les cas suivants ne doivent *pas* passer :
-	060606060
-	33606060606
-	+01600000000
-	+33000000000
-	00033606060606
-	0020304050
++
+----
+060606060
+33606060606
++01600000000
++33000000000
+00033606060606
+0020304050
+----
 +
 C'est l'occasion de réviser vos expressions rationnelles :)
 footnote:[Une bière sera offerte au premier participant qui gère tous les cas en une seule expression rationnelle (et qui a lu l'énoncé :P)].
