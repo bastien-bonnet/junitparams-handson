@@ -148,7 +148,7 @@ Nous allons, de la même manière, créer un test paramétrique avec convertisse
 
 Pour cet exercice, nous disposons de la classe `Coordinates`, qui représente un jeu de coordonnées dans un espace 2D, c'est-à-direune abcsisse (x) et une ordonnée (y). Cette classe dispose d'une méthode `xDiff` qui calcule la différence, en valeur absolue, entre deux coordonnées en abscisse. Par exemple, `new Coordinates(1,1).xDiff(new Coordinates(2, 8))` doit retourner `1`.
 
-En s'inspirant de l'exemple ci-dessus, nous allons créer un test paramétrique avec conversion de paramètre. Les paramètres sont fournis par le fichier `coordinates_xDiff.csv`. La classe de test contient déjà la méthode de test (`xDiffTest`) ainsi que le convertisseur qui sera utilisé (`StringToCoordinatesConverter`).
+En s'inspirant de l'exemple ci-dessus, nous allons créer un test paramétrique avec conversion de paramètre. Les paramètres sont fournis par le fichier `coordinates_xDiff.csv`. La classe de test (`CoordinatesTest`) contient déjà la méthode de test (`xDiffTest`) ainsi que le convertisseur qui sera utilisé (`StringToCoordinatesConverter`).
 
 *Vous devez :*
 
