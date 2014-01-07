@@ -1,6 +1,6 @@
-= Hands on junitparams
+= Hands on JUnitParams
 
-L'objectif de cet atelier pratique est de découvrir junitparams. Junitparams fournit un runner à Junit permettant d'écrire des test paramétriques :
+L'objectif de cet atelier pratique est de découvrir JUnitParams. JUnitParams fournit un runner à Junit permettant d'écrire des test paramétriques :
 
 * légers à implémenter : il suffit d’une annotation sur la classe, sur la méthode de test et d’une méthode fournissant les paramètres,
 * lisibles : chaque méthode de test dispose de ses propres paramètres, donc ceux-ci restent très lisibles. De plus, le fait que les paramètres apparaissent dans la signature de la méthode de test facilite encore plus la compréhension du fonctionnement du test,
@@ -15,10 +15,11 @@ La classe sur laquelle nous allons travailler, +PhoneUtils+, contient des métho
 _TODO 1.x_
 
 Nous désirons développer la méthode utilitaire +isValidPhoneNumber(String phoneNumber)+ de la classe +PhoneUtils+ qui vérifie si un numéro de téléphone donné est valide. Les numéros considérés comme valides sont :
+
 * les numéros français locaux, qui sont composés d'un idicatif de zone (de 01 à 09) suivi de 8 chiffres. Ex : `0120304050`,
 * les numéros français avec préfixe international (qui est soit `+33` soit `0033` et remplace le premier 0 d'un numéro local). Ex : `+33120304050`, `0033120304050`.
 
-Pour ce faire, nous allons tout d'abord écrire un test unitaire paramétrique, +isValidPhoneNumberTest+, dont le squelette est déjà présent dans la classe +PhoneUtilsTest+. On remarque que contrairement aux tests unitaires Junit habituels, cette méthode dispose de paramètres : il s'agit d'un test paramétrique. Vous l'aurez deviné, le premier paramètre est le numéro à tester, et le second le résultat attendu pour ce numéro. L'ensemble de ces deux paramètres forme un jeu de test. Le runner de junitparams, +JUnitParamsRunner+ (visible dans l'annotation +@RunWith(JUnitParamsRunner.class)+ de la classe de test) injectera les paramètres qu'il trouvera fournis par la méthode respectant la convention de nommage +parametersFor+ + +nomDeLaMéthodeDeTest+.
+Pour ce faire, nous allons tout d'abord écrire un test unitaire paramétrique, +isValidPhoneNumberTest+, dont le squelette est déjà présent dans la classe +PhoneUtilsTest+. On remarque que contrairement aux tests unitaires Junit habituels, cette méthode dispose de paramètres : il s'agit d'un test paramétrique. Vous l'aurez deviné, le premier paramètre est le numéro à tester, et le second le résultat attendu pour ce numéro. L'ensemble de ces deux paramètres forme un jeu de test. Le runner de JUnitParams, +JUnitParamsRunner+ (visible dans l'annotation +@RunWith(JUnitParamsRunner.class)+ de la classe de test) injectera les paramètres qu'il trouvera fournis par la méthode respectant la convention de nommage +parametersFor+ + +nomDeLaMéthodeDeTest+.
 
 La méthode fournissant les paramètres est ici +parametersForIsValidPhoneNumberTest()+. Les deux premiers jeux de tests sont déjà fournis pour faciliter le démarrage.
 
@@ -29,7 +30,7 @@ Il vous faut donc :
 +
 image::images/test-result-1.png[]
 +
-On observe que la présentation des résultats dans l'EDI se fait par méthode de test, puis par jeu de test. Cela permet d'identifier très rapidement le jeu de test qui pose problème quand un test échoue. Ici nous utilisons uniquement des types primitifs pour les paramètres, mais lorsque des types complexes (objets) sont utilisés, junitparams appelle automatiquement la méthode +toString()+ de ces objets pour la présentation des résultats de l'exécution des tests, ce qui donne une bonne lisibilité.
+On observe que la présentation des résultats dans l'EDI se fait par méthode de test, puis par jeu de test. Cela permet d'identifier très rapidement le jeu de test qui pose problème quand un test échoue. Ici nous utilisons uniquement des types primitifs pour les paramètres, mais lorsque des types complexes (objets) sont utilisés, JUnitParams appelle automatiquement la méthode +toString()+ de ces objets pour la présentation des résultats de l'exécution des tests, ce qui donne une bonne lisibilité.
 - implémenter juste ce qu'il faut dans la méthode pour que le test passent
 - ajouter un jeu de test dans +parametersForIsValidPhoneNumberTest+ et recommencer à partir du deuxième point jusqu'à ce que tous les cas de tests passent.
 +
@@ -63,7 +64,7 @@ Sur le modèle de l'exercice précédent, il vous faut à présent écrire un no
 == Charger les paramètres depuis une classe externe
 _TODO 3.x_
 
-junitparams fournit la possibilité de charger les paramètres d'une méthode de test depuis une classe externe. C'est très pratique lorsque l'on souhaite externaliser la logique de génération des paramètres (par exemple pour la réutiliser ailleurs, ou parce qu'elle est complexe). Pour ce faire, il faut ajouter un paramètre à l'annotation +@Parameters+ de junitparams :
+JUnitParams fournit la possibilité de charger les paramètres d'une méthode de test depuis une classe externe. C'est très pratique lorsque l'on souhaite externaliser la logique de génération des paramètres (par exemple pour la réutiliser ailleurs, ou parce qu'elle est complexe). Pour ce faire, il faut ajouter un paramètre à l'annotation +@Parameters+ de JUnitParams :
 
 	@Parameters(source = MyProvider.class)
 
@@ -72,7 +73,7 @@ Pour illustrer cela, nous allons a présent considérer la méthode +internation
 Vous devez :
 
 - compléter la méthode de test unitaire prévue à cet effet (+internationalizeTest+). Ne pas oublier de spécifier que les paramètres sont fournis par la classe externe +PhoneNumberProvider+.
-- junitparams va aller chercher les paramètres dans les méthodes dont le nom commence par +provide+. Vous allez donc compléter la méthode +provideLocalNumbers()+ de la classe +PhoneNumberProvider+. Vous pouvez par exemple lui faire retourner un tableau de 20 numéros générés aléatoirement (la méthode de génération de numéros locaux aléatoire vous est fournie).
+- JUnitParams va aller chercher les paramètres dans les méthodes dont le nom commence par +provide+. Vous allez donc compléter la méthode +provideLocalNumbers()+ de la classe +PhoneNumberProvider+. Vous pouvez par exemple lui faire retourner un tableau de 20 numéros générés aléatoirement (la méthode de génération de numéros locaux aléatoire vous est fournie).
 - implémenter la méthode +internationalize(String localPhoneNumber)+.
 
 == Charger les paramètres depuis un fichier CSV
@@ -90,7 +91,7 @@ Vous devez :
 == Utiliser des valeurs littérales directement
 _TODO 5.x_
 
-Pour les cas simples, c'est-à-dire avec peu de paramètres, junitparams offre la possibilité de définir les paramètres d'un test directement dans l'annotation. La syntaxe est la suivante :
+Pour les cas simples, c'est-à-dire avec peu de paramètres, JUnitParams offre la possibilité de définir les paramètres d'un test directement dans l'annotation. La syntaxe est la suivante :
 
 	@Parameters({
 		"1, false",
@@ -116,4 +117,4 @@ Nous disposons de la classe `Coordinates`, qui représente un jeu de coordonnée
 
 
 == Aller plus loin
-junitparams propose encore d'autres manières que celles qui ont été évoquées ici pour charger les paramètres. Il permet par exemple d'utiliser des classe de transformation pour convertir les données brutes avant de les charger dans les tests. Pour touver un exemple exhaustif et résumé des cas d'utilisation, c'est https://code.google.com/p/junitparams/source/browse/src/test/java/junitparams/usage/Samples_of_Usage_Test.java[ici].
+JUnitParams propose encore d'autres manières que celles qui ont été évoquées ici pour charger les paramètres. Il permet par exemple d'utiliser des classe de transformation pour convertir les données brutes avant de les charger dans les tests. Pour touver un exemple exhaustif et résumé des cas d'utilisation, c'est https://code.google.com/p/junitparams/source/browse/src/test/java/junitparams/usage/Samples_of_Usage_Test.java[ici].
