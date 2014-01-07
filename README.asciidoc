@@ -19,7 +19,7 @@ Nous désirons développer la méthode utilitaire +isValidPhoneNumber(String pho
 * les numéros français locaux, qui sont composés d'un idicatif de zone (de 01 à 09) suivi de 8 chiffres. Ex : `0120304050`,
 * les numéros français avec préfixe international (qui est soit `+33` soit `0033` et remplace le premier 0 d'un numéro local). Ex : `+33120304050`, `0033120304050`.
 
-Pour ce faire, nous allons tout d'abord écrire un test unitaire paramétrique, +isValidPhoneNumberTest+, dont le squelette est déjà présent dans la classe +PhoneUtilsTest+. On remarque que contrairement aux tests unitaires Junit habituels, cette méthode dispose de paramètres : il s'agit d'un test paramétrique. Vous l'aurez deviné, le premier paramètre est le numéro à tester, et le second le résultat attendu pour ce numéro. L'ensemble de ces deux paramètres forme un jeu de test. Le runner de JUnitParams, +JUnitParamsRunner+ (visible dans l'annotation +@RunWith(JUnitParamsRunner.class)+ de la classe de test) injectera les paramètres qu'il trouvera fournis par la méthode respectant la convention de nommage +parametersFor+ + +nomDeLaMéthodeDeTest+.
+Pour ce faire, nous allons tout d'abord écrire un test unitaire paramétrique, +isValidPhoneNumberTest(final String phoneNumber, final boolean expectedResult)+, dont le squelette est déjà présent dans la classe +PhoneUtilsTest+. On remarque que contrairement aux tests unitaires Junit habituels, cette méthode dispose de paramètres : il s'agit d'un test paramétrique. Vous l'aurez deviné, le premier paramètre est le numéro à tester, c'est-à-dire l'argument avec lequel sera appelé la méthode testée, et le second le résultat attendu pour ce numéro, qui vous servira à faire l'assertion. L'ensemble de ces deux paramètres forme un jeu de test. Le runner de JUnitParams, +JUnitParamsRunner+ (visible dans l'annotation +@RunWith(JUnitParamsRunner.class)+ de la classe de test) injectera les paramètres qu'il trouvera fournis par la méthode respectant la convention de nommage +parametersFor+ + +nomDeLaMéthodeDeTest+.
 
 La méthode fournissant les paramètres est ici +parametersForIsValidPhoneNumberTest()+. Les deux premiers jeux de tests sont déjà fournis pour faciliter le démarrage.
 
@@ -97,6 +97,8 @@ Pour les cas simples, c'est-à-dire avec peu de paramètres, JUnitParams offre l
 		"1, false",
 		"2, true" })
 
+Chaque groups délimité par des `""` constitue un jeu de paramètres. Ainsi l'exemple ci-dessus contient 2 jeux de paramètres pour un test paramétrique dont la signature pourrait être `void monTest(int i, boolean b)`.
+
 Cette fonctionnalité est à utiliser avec parcimonie car vous perdez les bénéfices de la compilation.
 
 Vous allez devoir implémenter la méthode +areSameNumber(String number1, String number2)+, qui vérifie si deux numéros correspondent. Par exemple, +0120304050+ et `+33120304050` correspondent, la méthode doit donc retourner +true+.
@@ -112,9 +114,46 @@ _TODO 6.x_
 
 Lorsque les données de test sont générées dans un format ne correspondant pas à celui que l'on souhaiterait manipuler dans nos tests, par exemple parce que les jeux de tests sont générés par une entité externe, il peut être pratique de les convertir automatiquement lors de l'injection dans  le test. C'est ce cas d'utilisation un peu plus avancé que nous allons voir dans cet exercice.
 
+Prenons un exemple simple (tiré du http://code.google.com/p/junitparams[site officiel de JUnitParams]) :
+
+----
+@Test
+@Parameters({ "08-01-2014" })
+public void convertSingleParam(@ConvertParam(StringToDateConverter.class) Date date) {
+	Calendar calendar = Calendar.getInstance();	
+	calendar.setTime(date);
+
+	assertThat(calendar.get(Calendar.YEAR)).isEqualTo(2014);
+	assertThat(calendar.get(Calendar.MONTH)).isEqualTo(0);
+	assertThat(calendar.get(Calendar.DAY_OF_MONTH)).isEqualTo(8);
+}
+----
+Ici, les paramètres sont spécifiés sous forme de `String` (parce que c'est bien pratique) mais nous souhaiterions manipuler directement un `Date` dans le test. Nous souhaitons donc effectuer une conversion de String vers date. Il suffit d'annoter le paramètre à convertir  avec un `@ConvertParam(MonConvertisseur.class)` comme vous pouvez le voir ci-dessous. Quand au code du convertisseur lui-même, le voici :
+
+----
+public static class StringToDateConverter implements ParamConverter<Date> {
+	@Override
+	public Date convert(Object param, String options) {
+		try {
+			return new SimpleDateFormat("dd-MM-yyyy").parse(param.toString());
+		} catch (ParseException e) {
+			throw new RuntimeException(e);
+		}
+	}
+}
+----
+
+.Exercice
 Nous disposons de la classe `Coordinates`, qui représente un jeu de coordonnées dans un espace 2D, c'est-à-direune abcsisse (x) et une ordonnée (y). Cette classe dispose d'une méthode `xDiff` qui calcule la différence, en valeur absolue, entre deux coordonnées en abscisse. Par exemple, `new Coordinates(1,1).xDiff(new Coordinates(2, 8))` doit retourner `1`.
+
+En s'inspirant de l'exemple ci-dessus, nous allons créer un test paramétrique avec conversion de paramètre. Les paramètres sont fournis par le fichier `coordinates_xDiff.csv`. La classe de test contient déjà la méthode de test (`xDiffTest`) ainsi que le convertisseur qui sera utilisé (`StringToCoordinatesConverter`).
+
+Vous devez :
+
+- Changer la signature de la méthode de test `xDiffTest` pour utiliser le convertisseur fourni ;
+- Implémenter la méthode `xDiff` de la classe `Coordinates`.
 
 
 
 == Aller plus loin
-JUnitParams propose encore d'autres manières que celles qui ont été évoquées ici pour charger les paramètres. Il permet par exemple d'utiliser des classe de transformation pour convertir les données brutes avant de les charger dans les tests. Pour touver un exemple exhaustif et résumé des cas d'utilisation, c'est https://code.google.com/p/junitparams/source/browse/src/test/java/junitparams/usage/Samples_of_Usage_Test.java[ici].
+JUnitParams propose encore d'autres manières que celles qui ont été évoquées ici pour charger les paramètres. Pour touver un exemple exhaustif et résumé des cas d'utilisation, c'est https://code.google.com/p/junitparams/source/browse/src/test/java/junitparams/usage/Samples_of_Usage_Test.java[ici].
