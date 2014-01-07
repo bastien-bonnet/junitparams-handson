@@ -41,7 +41,7 @@ public class Coordinates {
 	}
 
 	public int xDiff(final Coordinates other) {
-		// TODO 5 Write implementation by replacing the following line
+		// TODO 6 Write implementation by replacing the following line
 		throw new UnsupportedOperationException();
 	}
 

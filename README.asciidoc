@@ -106,6 +106,14 @@ Vous devez :
 - implémenter la méthode +areSameNumber+.
 
 
+== Convertir des données brutes en paramètres utilisables
+_TODO 6.x_
+
+Lorsque les données de test sont générées dans un format ne correspondant pas à celui que l'on souhaiterait manipuler dans nos tests, par exemple parce que les jeux de tests sont générés par une entité externe, il peut être pratique de les convertir automatiquement lors de l'injection dans  le test. C'est ce cas d'utilisation un peu plus avancé que nous allons voir dans cet exercice.
+
+Nous disposons de la classe `Coordinates`, qui représente un jeu de coordonnées dans un espace 2D, c'est-à-direune abcsisse (x) et une ordonnée (y). Cette classe dispose d'une méthode `xDiff` qui calcule la différence, en valeur absolue, entre deux coordonnées en abscisse. Par exemple, `new Coordinates(1,1).xDiff(new Coordinates(2, 8))` doit retourner `1`.
+
+
 
 == Aller plus loin
 junitparams propose encore d'autres manières que celles qui ont été évoquées ici pour charger les paramètres. Il permet par exemple d'utiliser des classe de transformation pour convertir les données brutes avant de les charger dans les tests. Pour touver un exemple exhaustif et résumé des cas d'utilisation, c'est https://code.google.com/p/junitparams/source/browse/src/test/java/junitparams/usage/Samples_of_Usage_Test.java[ici].
