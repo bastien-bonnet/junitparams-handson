@@ -2,8 +2,8 @@
 
 L'objectif de cet atelier pratique est de découvrir JUnitParams. JUnitParams fournit un runner à Junit permettant d'écrire des test paramétriques :
 
-* légers à implémenter : il suffit d’une annotation sur la classe, sur la méthode de test et d’une méthode fournissant les paramètres,
-* lisibles : chaque méthode de test dispose de ses propres paramètres, donc ceux-ci restent très lisibles. De plus, le fait que les paramètres apparaissent dans la signature de la méthode de test facilite encore plus la compréhension du fonctionnement du test,
+* légers à implémenter : il suffit d’une annotation sur la classe, sur la méthode de test et d’une méthode fournissant les paramètres ;
+* lisibles : chaque méthode de test dispose de ses propres paramètres, donc ceux-ci restent très lisibles. De plus, le fait que les paramètres apparaissent dans la signature de la méthode de test facilite encore plus la compréhension du fonctionnement du test ;
 * indépendants : les tests paramétriques ont chacun leur propre source de paramètres, ce qui permet également de mélanger tests paramétriques et non paramétriques dans la même classe.
 
 Chaque section de cet atelier est associée à un morceau de code à compléter ou à écrire. Utiliser la vue tâches (java tasks) de l'IDE pour visualiser les _TODO_, qui sont numérotés et précisés au début de chaque section.
@@ -23,15 +23,15 @@ Pour ce faire, nous allons tout d'abord écrire un test unitaire paramétrique, 
 
 La méthode fournissant les paramètres est ici +parametersForIsValidPhoneNumberTest()+. Les deux premiers jeux de tests sont déjà fournis pour faciliter le démarrage.
 
-Il vous faut donc :
+*Il vous faut donc :*
 
-- implémenter la méthode de test +isValidPhoneNumberTest+
+- implémenter la méthode de test +isValidPhoneNumberTest+ ;
 - lancer la classe de test et vérifier que le test est au rouge (TDD). En profiter pour observer l'affichage des résultats de tests dans l'EDI (Eclipse, très similaire sur IntelliJ) :
 +
 image::images/test-result-1.png[]
 +
-On observe que la présentation des résultats dans l'EDI se fait par méthode de test, puis par jeu de test. Cela permet d'identifier très rapidement le jeu de test qui pose problème quand un test échoue. Ici nous utilisons uniquement des types primitifs pour les paramètres, mais lorsque des types complexes (objets) sont utilisés, JUnitParams appelle automatiquement la méthode +toString()+ de ces objets pour la présentation des résultats de l'exécution des tests, ce qui donne une bonne lisibilité.
-- implémenter juste ce qu'il faut dans la méthode pour que le test passent
+On observe que la présentation des résultats dans l'EDI se fait par méthode de test, puis par jeu de test. Cela permet d'identifier très rapidement le jeu de test qui pose problème quand un test échoue. Ici nous utilisons uniquement des types primitifs pour les paramètres, mais lorsque des types complexes (objets) sont utilisés, JUnitParams appelle automatiquement la méthode +toString()+ de ces objets pour la présentation des résultats de l'exécution des tests, ce qui donne une bonne lisibilité ;
+- implémenter juste ce qu'il faut dans la méthode pour que le test passent ;
 - ajouter un jeu de test dans +parametersForIsValidPhoneNumberTest+ et recommencer à partir du deuxième point jusqu'à ce que tous les cas de tests passent.
 +
 Aide : les cas suivants doivent passer :
@@ -70,7 +70,7 @@ JUnitParams fournit la possibilité de charger les paramètres d'une méthode de
 
 Pour illustrer cela, nous allons a présent considérer la méthode +internationalize(String localPhoneNumber)+ fournie dans les sources. Cette méthode doit ajouter un préfixe international (`+33`) à des numéros locaux français (par exemple +0120304050+).
 
-Vous devez :
+*Vous devez :*
 
 - compléter la méthode de test unitaire prévue à cet effet (+internationalizeTest+). Ne pas oublier de spécifier que les paramètres sont fournis par la classe externe +PhoneNumberProvider+.
 - JUnitParams va aller chercher les paramètres dans les méthodes dont le nom commence par +provide+. Vous allez donc compléter la méthode +provideLocalNumbers()+ de la classe +PhoneNumberProvider+. Vous pouvez par exemple lui faire retourner un tableau de 20 numéros générés aléatoirement (la méthode de génération de numéros locaux aléatoire vous est fournie).
@@ -83,7 +83,7 @@ Il est également possible de charger les paramètres depuis un fichier externe 
 
 Il s'agit maintenant de développer et tester la méthode +getLocalZoneIndicator(String phoneNumber)+, qui extrait l'indicateur de zone d'un numéro de téléphone français (ex.: "05" pour `0520304050`, "01" pour `+33120304050`). Un fichier CSV contenant des données de test vous est fourni +local_zone_indicators.csv+.
 
-Vous devez :
+*Vous devez :*
 
 - complétér la méthode de test unitaire prévue a cet effet (+getLocalZoneIndicatorTest+). Ne pas oublier de spécifier que les paramètres sont fournis par un fichier CSV.
 - implémenter la méthode +getLocalZoneIndicator+.
@@ -103,7 +103,7 @@ Cette fonctionnalité est à utiliser avec parcimonie car vous perdez les béné
 
 Vous allez devoir implémenter la méthode +areSameNumber(String number1, String number2)+, qui vérifie si deux numéros correspondent. Par exemple, +0120304050+ et `+33120304050` correspondent, la méthode doit donc retourner +true+.
 
-Vous devez :
+*Vous devez :*
 
 - compléter la méthode de méthode de test unitaire +areSameNumberTest+. Ne pas oublier de spécifier les paramètres de manière littérale directement dans l'annotation.
 - implémenter la méthode +areSameNumber+.
@@ -143,18 +143,20 @@ public static class StringToDateConverter implements ParamConverter<Date> {
 }
 ----
 
-.Exercice
-****
-Nous disposons de la classe `Coordinates`, qui représente un jeu de coordonnées dans un espace 2D, c'est-à-direune abcsisse (x) et une ordonnée (y). Cette classe dispose d'une méthode `xDiff` qui calcule la différence, en valeur absolue, entre deux coordonnées en abscisse. Par exemple, `new Coordinates(1,1).xDiff(new Coordinates(2, 8))` doit retourner `1`.
+
+Nous allons, de la même manière, créer un test paramétrique avec convertisseur de paramètre.
+
+Pour cet exercice, nous disposons de la classe `Coordinates`, qui représente un jeu de coordonnées dans un espace 2D, c'est-à-direune abcsisse (x) et une ordonnée (y). Cette classe dispose d'une méthode `xDiff` qui calcule la différence, en valeur absolue, entre deux coordonnées en abscisse. Par exemple, `new Coordinates(1,1).xDiff(new Coordinates(2, 8))` doit retourner `1`.
 
 En s'inspirant de l'exemple ci-dessus, nous allons créer un test paramétrique avec conversion de paramètre. Les paramètres sont fournis par le fichier `coordinates_xDiff.csv`. La classe de test contient déjà la méthode de test (`xDiffTest`) ainsi que le convertisseur qui sera utilisé (`StringToCoordinatesConverter`).
 
-Vous devez :
+*Vous devez :*
 
 - Changer la signature de la méthode de test `xDiffTest` pour utiliser le convertisseur fourni ;
 - Implémenter la méthode `xDiff` de la classe `Coordinates`.
-****
 
 
 == Aller plus loin
 JUnitParams propose encore d'autres manières que celles qui ont été évoquées ici pour charger les paramètres. Pour touver un exemple exhaustif et résumé des cas d'utilisation, c'est https://code.google.com/p/junitparams/source/browse/src/test/java/junitparams/usage/Samples_of_Usage_Test.java[ici].
+
+Pour une comparaison de JUnitParams avec JUnit de base pour les tests paramétriques, http://blog.xebia.fr/2013/08/12/les-tests-unitaires-parametriques-avec-junitparams-une-alternative-a-junit-parameterized/[c'est ici].
